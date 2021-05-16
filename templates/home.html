@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <h1>Общие сведения о программе лояльности</h1>
+
+    {% if user.is_authenticated %}
+
+        <p>Вы вошли в систему как {{ user.email }} (<a href="{% url 'account_logout' %}">Выход</a>).</p>
+
+        <h3>Информация об участниках программы лояльности</h3>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Всего участников
+                <span class="badge bg-primary rounded-pill">{{ members_count }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Новых учатников за последнюю неделю
+                <span class="badge bg-primary rounded-pill">{{ members_count }}</span>
+            </li>
+        </ul>
+
+    {% else %}
+
+        <p>Вы не вошли в систему (<a href="{% url 'account_login' %}">Вход</a> |
+            <a href="{% url 'account_signup' %}">Регистрация</a>)</p>
+
+    {% endif %}
+{% endblock %}
